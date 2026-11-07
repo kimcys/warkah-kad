@@ -1,0 +1,25 @@
+{
+  "name": "warkah-kad",
+  "private": true,
+  "type": "module",
+  "description": "Warkah Kad: build your own digital wedding invitation (pick a theme, fill in the details, preview, publish).",
+  "scripts": {
+    "sync:builder": "node scripts/sync-builder-assets.mjs",
+    "predev": "npm run sync:builder",
+    "dev": "vite",
+    "prebuild": "npm run sync:builder",
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev:edge": "npm run build && npm --prefix api run dev",
+    "deploy": "npm run build && npm --prefix api run deploy"
+  },
+  "dependencies": {
+    "@warkah/card-kit": "file:../warkah-engine/kit"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

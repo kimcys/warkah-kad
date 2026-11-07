@@ -1,0 +1,43 @@
+name = "warkah-kad-api"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+
+# The site's address (landing page, builder and API). No route yet: add one when the domain is chosen, together with PUBLIC_ORIGIN below
+# (kad.warkah.com.my later). Until then the Worker is only reachable locally.
+workers_dev = false
+preview_urls = false
+
+[[d1_databases]]
+binding = "DB"
+database_name = "warkah-kad"
+database_id = "00000000-0000-0000-0000-000000000000"   # replace with the id printed by `wrangler d1 create warkah-kad`
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "warkah-kad-media"
+
+[vars]
+PUBLIC_ORIGIN = "https://kad.aimanhakimcy.com"
+# Where published cards are served: https://<CARD_HOST>/<slug>/. May be the same host as the site (cards then sit beside the builder and
+# share its origin) or a separate one. Keep in step with CARD_DOMAIN in the engine (src/lib/system-fields.js).
+CARD_HOST = "kad.aimanhakimcy.com"
+# While online payment is off, customers are sent to this WhatsApp number to activate their card (digits only, with country code).
+CONTACT_WHATSAPP = "60172655375"
+
+# Daily cleanup at 20:00 UTC = 04:00 Malaysia time.
+[triggers]
+crons = ["0 20 * * *"]
+
+# The site itself: the Vite build is served from this Worker, so the pages and the API share one origin (the API refuses cross-origin writes and
+# its session cookie is same-origin). Build first: `npm run build` in the repo root.
+[assets]
+directory = "../dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+# The Worker answers first for everything except the folders of static files, so a published card at /<slug>/ reaches it (without this the
+# single-page fallback would answer). What the Worker does not own it hands to ASSETS.
+run_worker_first = ["/*", "!/assets/*", "!/builder/*", "!/preview/*", "!/brand/*"]
+
+[observability]
+enabled = true

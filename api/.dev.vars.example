@@ -1,0 +1,7 @@
+# Copy to .dev.vars for `wrangler dev`. Never commit .dev.vars.
+OTP_PEPPER=dev-only-change-me
+EMAIL_MODE=fake
+BUILD_SECRET=dev-build-secret
+# Published cards are served at http://localhost:8787/<slug>/ in development. `npm run dev` passes --local-upstream, because wrangler otherwise rewrites the
+# request's host to the production route's host and the Worker cannot tell the card host from the site.
+CARD_HOST=localhost

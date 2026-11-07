@@ -1,0 +1,20 @@
+# Read by Cloudflare Workers static assets (api/wrangler.toml [assets]).
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Only / (the landing page) is for search engines. Every other path is sent noindex: the builder, the API.
+# /:a matches any one-segment path and /:a/* anything deeper, so the root path never gets the header; the rest are detached below.
+/:a
+  X-Robots-Tag: noindex
+/:a/*
+  X-Robots-Tag: noindex
+/robots.txt
+  ! X-Robots-Tag
+/index.html
+  ! X-Robots-Tag
+
+# Hashed bundles never change under the same name.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -1,0 +1,9 @@
+node_modules
+dist
+.DS_Store
+.env*
+.wrangler
+.dev.vars
+# generated from warkah-engine by scripts/sync-builder-assets.mjs
+public/builder/
+public/preview/

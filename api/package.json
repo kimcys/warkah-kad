@@ -1,0 +1,25 @@
+{
+  "name": "warkah-kad-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local-upstream localhost:8787",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "migrate:local": "wrangler d1 migrations apply warkah-kad --local",
+    "deploy": "wrangler deploy",
+    "make-admin": "node scripts/make-admin.mjs"
+  },
+  "dependencies": {
+    "@warkah/card-kit": "file:../../warkah-engine/kit",
+    "hono": "^4.13.14",
+    "valibot": "^1.5.0"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.8",
+    "@cloudflare/workers-types": "^5.20261027.1",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5",
+    "wrangler": "^4.153.0"
+  }
+}
