@@ -86,5 +86,6 @@ export function landing({ go }) {
     h("footer", { class: "lp-foot" },
       brandLock("cream", "Warkah Kad"),
       h("p", {}, t("Warkah Kad. Kad kahwin digital yang dibina oleh anda.")),
+      h("p", { class: "lp-links" }, h("a", { href: "/terma", onclick: (e) => { e.preventDefault(); go("/terma"); } }, t("Terma")), " · ", h("a", { href: "/privasi", onclick: (e) => { e.preventDefault(); go("/privasi"); } }, t("Privasi"))),
       h("a", { href: wa("Salam, saya ada pertanyaan tentang Warkah Kad."), target: "_blank", rel: "noopener noreferrer" }, t("Hubungi kami di WhatsApp"))));
 }

@@ -10,6 +10,10 @@
   X-Robots-Tag: noindex
 /:a/*
   X-Robots-Tag: noindex
+/privasi
+  ! X-Robots-Tag
+/terma
+  ! X-Robots-Tag
 /robots.txt
   ! X-Robots-Tag
 /index.html

@@ -24,7 +24,8 @@ export function signInView({ eyebrow, title, emailCode, lead = t("Masukkan e-mel
       eyebrow ? h("p", { class: "gold-eyebrow" }, eyebrow) : null,
       heading, leadEl,
       ...actions,
-      notice));
+      notice,
+      h("p", { class: "signlegal" }, t("Dengan log masuk, anda bersetuju dengan "), h("a", { href: "/terma", target: "_blank", rel: "noopener" }, t("Terma")), t(" dan "), h("a", { href: "/privasi", target: "_blank", rel: "noopener" }, t("Notis Privasi")), ".")));
 }
 
 const isOffline = (e) => e instanceof TypeError || e?.name === "TypeError" || e?.name === "AbortError" || e?.name === "TimeoutError";

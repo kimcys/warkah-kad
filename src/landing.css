@@ -76,3 +76,7 @@
   .lp-feats { grid-template-columns: repeat(3, 1fr); }
   .lp-sec { padding: 80px 20px; }
 }
+
+/* privacy notice and terms (the paper itself is styled in style.css: .legal-paper) */
+.legal { padding: 96px 16px 64px; }
+.legal-wrap { margin: 0 auto; }

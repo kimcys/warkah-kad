@@ -2,7 +2,7 @@ import "./style.css";
 import { h } from "./lib/dom.js";
 import { t } from "./lib/i18n.js";
 
-// Routes:  /  the landing page     /app  the customer's pages (sign-in, then /app/cards: the builder)
+// Routes:  /  the landing page     /privasi  /terma  the privacy notice and the terms     /app  the customer's pages (sign-in, then /app/cards: the builder)
 // Anything else is a card address (served by the Worker before this app ever loads) or not found.
 const app = document.getElementById("app");
 let renderToken = 0;
@@ -19,11 +19,18 @@ async function render() {
   const [slug = ""] = path.split("/").filter(Boolean);
   app.replaceChildren();
   document.title = "Warkah Kad";
-  document.body.classList.toggle("site", slug === "");
+  document.body.classList.toggle("site", slug === "" || slug === "privasi" || slug === "terma");
   if (slug === "") {
     const { landing } = await import("./screens/landing.js");
     if (token !== renderToken) return;
     app.append(landing({ go }));
+    return;
+  }
+  if (slug === "privasi" || slug === "terma") {
+    const { privacyPage, termsPage } = await import("./screens/legal.js");
+    if (token !== renderToken) return;
+    app.append((slug === "privasi" ? privacyPage : termsPage)({ go }));
+    window.scrollTo(0, 0);
     return;
   }
   if (slug === "app") {

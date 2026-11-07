@@ -79,6 +79,9 @@ export function createApi({ base = "", fetch: fetchImpl } = {}) {
       return api(`/api/cards/${enc(id)}/assets`, { method: "POST", form });
     },
     deleteCardAsset: (id, assetId) => api(`/api/cards/${enc(id)}/assets/${enc(assetId)}`, { method: "DELETE" }),
+    /* ----- staff (admin accounts only) ----- */
+    adminCards: (q = "") => api(`/api/admin/cards?q=${enc(q)}`, { fresh: true }),
+    adminSetCard: (id, body) => api(`/api/admin/cards/${enc(id)}`, { method: "PATCH", json: body }),
     /** Where the editor shows one of the customer's own uploads (private to them). */
     cardFileUrl: (id, path) => `${base}/api/cards/${enc(id)}/files/${path.split("/").map(enc).join("/")}`
   };

@@ -1,11 +1,9 @@
 /* The invitation builder (src/screens/cards.js). Mobile first: one column and a "Lihat contoh" button; from 900 px the phone preview sits beside the form.
    It uses the same tokens as the rest of the app (--ink, --accent, --ctl-border, --card, --field, --hair ...). */
-
 .cdx .cd-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .cdx .cd-small { font-size: 0.78rem; }
 .cdx .cd-ok { color: var(--ok); font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; }
 .cdx .cd-ok svg { width: 1.1em; height: 1.1em; }
-
 /* ---------- cards list and new card ---------- */
 .cdx .cd-list { display: grid; gap: 14px; padding: 4px 20px 16px; }
 .cdx .cd-mine { display: grid; gap: 8px; padding: 18px; border: 1px solid var(--hair2); border-radius: var(--r-panel); background: var(--card); }
@@ -23,10 +21,8 @@
 .cdx .cd-new { display: grid; gap: 8px; padding: 4px 20px 32px; }
 .cdx .cd-new h2 { margin: 18px 0 4px; font: 500 1.35rem/1.15 var(--serif); }
 .cdx .cd-new p { margin: 0 0 10px; }
-
 .cdx .cd-pill { display: inline-block; padding: 2px 9px; border-radius: var(--r-pill); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.04em; background: var(--c-selected); color: var(--c-text-2); }
 .cdx .cd-pill.malay { background: color-mix(in srgb, var(--accent) 22%, var(--paper)); }
-
 .cdx .cd-themes { display: grid; gap: 12px; }
 .cdx .cd-theme { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; text-align: left; padding: 10px; border: 1px solid var(--ctl-border); border-radius: 16px; background: var(--card); color: var(--text); }
 .cdx .cd-theme.on { border: 2px solid var(--ink); padding: 9px; background: var(--c-selected); }
@@ -37,7 +33,6 @@
 .cdx .cd-theme .cd-meta .muted { font-size: 0.8rem; line-height: 1.35; }
 .cdx .cd-theme .tick { position: absolute; top: 10px; right: 10px; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: var(--on-ink); }
 .cdx .cd-theme .tick svg { width: 14px; height: 14px; }
-
 /* ---------- the editor ---------- */
 .cdx .cd-page .bar h1 { font-size: 1.35rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cdx .savepill { flex: none; font-size: 0.75rem; color: var(--text3); text-align: right; max-width: 46%; }
@@ -47,7 +42,6 @@
 .cdx .savepill.conflict,
 .cdx .savepill.refused { color: var(--bad); }
 .cdx .savepill .linkbtn { font-size: 0.75rem; }
-
 .cdx .cd-tabs { display: flex; gap: 6px; padding: 0 20px 4px; overflow-x: auto; scrollbar-width: none; position: sticky; top: 0; z-index: 3; background: var(--body-bg, #E2D7C6); }
 .cdx .cd-tabs::-webkit-scrollbar { display: none; }
 .cdx .cd-tabs .cd-tab { flex: none; display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 6px 12px 6px 8px; border: 1px solid var(--hair2); border-radius: var(--r-pill); background: transparent; color: var(--text2); font-size: 0.82rem; }
@@ -55,7 +49,6 @@
 .cdx .cd-tabs .cd-tab.on { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
 .cdx .cd-tabs .cd-tab.on .no { background: rgba(245, 237, 224, 0.22); }
 .cdx .cd-tabs .cd-tab .cd-dot { min-width: 18px; height: 18px; padding: 0 5px; display: grid; place-items: center; border-radius: 9px; background: var(--accent); color: #fff; font-size: 0.68rem; font-weight: 500; }
-
 .cdx .cd-form { padding: 6px 0 150px; }
 .cdx .cd-form .stephead { margin: 14px 20px 2px; font: 500 1.7rem/1.1 var(--serif); }
 .cdx .cd-form .sec { margin: 26px 20px 0; font: 500 1.1rem/1.2 var(--serif); color: var(--head); }
@@ -67,10 +60,8 @@
 .cdx .cd-form .field.bad select { border-color: var(--bad); }
 .cdx .cd-form .err { min-height: 0; }
 .cdx .cd-form textarea { min-height: 88px; }
-
 .cdx .field.cd-dt .cd-dt-row { display: grid; grid-template-columns: 1fr 130px; gap: 10px; }
 .cdx .field.cd-dt input { width: 100%; min-height: 50px; padding: 12px 12px; border: 1px solid var(--ctl-border); border-radius: 12px; background: var(--field); font-size: 1rem; }
-
 .cdx .field.list .cd-rows { display: grid; gap: 10px; }
 .cdx .row-card { display: grid; gap: 8px; padding: 12px; border: 1px solid var(--hair2); border-radius: 14px; background: var(--card); }
 .cdx .row-card .cells { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; }
@@ -82,14 +73,12 @@
 .cdx .row-card .row-acts { display: flex; gap: 8px; align-items: center; justify-content: flex-end; }
 .cdx .iconbtn.cd-small { width: 36px; height: 36px; font-size: 0.95rem; }
 .cdx .field.list > .btn { justify-self: start; }
-
 .cdx .cd-palettes { display: flex; flex-wrap: wrap; gap: 8px; }
 .cdx .cd-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px 6px 8px; border: 1px solid var(--ctl-border); border-radius: var(--r-pill); background: var(--card); color: var(--text); font-size: 0.88rem; }
 .cdx .cd-chip.on { border: 2px solid var(--ink); padding: 5px 13px 5px 7px; background: var(--c-selected); }
 .cdx .cd-chip .cd-swatch { display: inline-flex; }
 .cdx .cd-chip .cd-swatch i { display: block; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--card); margin-left: -6px; }
 .cdx .cd-chip .cd-swatch i:first-child { margin-left: 0; }
-
 .cdx .cd-models { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .cdx .cd-model { display: grid; gap: 4px; align-content: start; padding: 8px; border: 1px solid var(--ctl-border); border-radius: 14px; background: var(--card); color: var(--text); text-align: center; }
 .cdx .cd-model.on { border: 2px solid var(--ink); padding: 7px; background: var(--c-selected); }
@@ -99,10 +88,8 @@
 .cdx .cd-model .mtags em { font-style: normal; font-size: 0.66rem; color: var(--ok); }
 .cdx .cd-model.auto { place-content: center; min-height: 120px; border-style: dashed; }
 .cdx .cd-model.auto .auto-text { font-weight: 500; }
-
 .cdx .song-state { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; min-height: 28px; }
 .cdx .field .btn.slim { justify-self: start; }
-
 /* pictures */
 .cdx .cd-image-row { display: flex; gap: 14px; align-items: flex-start; }
 .cdx .cd-thumb { width: 96px; height: 120px; object-fit: cover; border-radius: 12px; border: 1px solid var(--hair2); background: var(--card); flex: none; }
@@ -126,7 +113,9 @@
 .cdx .cd-switch input { margin-top: 3px; width: 20px; height: 20px; flex: none; }
 .cdx .cd-switch-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .cdx .cd-switch-text em { font-style: normal; font-size: 12px; color: var(--muted, #888); }
-@media (min-width: 720px) { .cdx .cd-two { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 720px) {
+.cdx .cd-two { grid-template-columns: 1fr 1fr; }
+}
 .cdx .todo { margin: 10px 20px 0; padding: 14px; border: 1px solid var(--hair2); border-radius: 14px; background: var(--card); display: grid; gap: 6px; justify-items: start; }
 .cdx .todo ul,
 .cdx .problems { margin: 0; padding-left: 18px; font-size: 0.9rem; }
@@ -139,7 +128,6 @@
 .cdx .slug-acts { display: flex; gap: 14px; align-items: center; justify-content: space-between; }
 .cdx .publish { margin-top: 24px; }
 .cdx .publish .btn { margin: 0 20px; width: calc(100% - 40px); }
-
 .cdx .cd-foot { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--paper) 94%, #fff); border-top: 1px solid var(--hair2); }
 .cdx .cd-foot .progress { flex: 1; min-width: 0; font-size: 0.78rem; line-height: 1.25; color: var(--text2); }
 .cdx .cd-foot .progress.done { color: var(--ok); }
@@ -147,7 +135,6 @@
 .cdx .cd-foot .btn.slim { width: auto; min-height: 46px; padding: 8px 16px; }
 .cdx .cd-foot [hidden] { display: none; }
 .cdx .cd-showpreview { position: fixed; right: 14px; bottom: calc(74px + env(safe-area-inset-bottom)); z-index: 5; width: auto; box-shadow: var(--shadow-2); }
-
 /* the phone preview */
 .cdx .cd-aside { display: none; }
 .cdx .cd-phone { position: relative; width: 340px; height: 736px; margin: 0 auto; border: 8px solid #2B1B18; border-radius: 34px; overflow: hidden; background: #fff; box-shadow: var(--shadow-2); }
@@ -160,27 +147,24 @@
 .cdx.cd-sheet .close { position: absolute; top: 4px; right: 12px; z-index: 3; }
 .cdx.cd-sheet .cd-phone { width: 270px; height: 584px; border-width: 6px; box-shadow: none; }
 .cdx.cd-sheet .cd-frame { transform: scale(0.6923); }
-
 @media (min-width: 900px) {
-  .cdx .cd-body { display: grid; grid-template-columns: minmax(0, 1fr) 376px; gap: 36px; align-items: start; }
-  .cdx .cd-aside { display: block; position: sticky; top: 64px; padding-top: 12px; }
-  .cdx .cd-showpreview { display: none; }
-  .cdx .cd-form { padding-bottom: 110px; max-width: 640px; }
-  .cdx .cd-tabs { padding: 0 12px 4px; }
-  .cdx .cd-themes { grid-template-columns: 1fr 1fr; }
-  .cdx .cd-list { grid-template-columns: 1fr 1fr; padding: 4px 12px 16px; }
-  .cdx .cd-foot { padding-left: 40px; padding-right: 40px; }
-  .cdx .cd-models { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cdx .cd-body { display: grid; grid-template-columns: minmax(0, 1fr) 376px; gap: 36px; align-items: start; }
+.cdx .cd-aside { display: block; position: sticky; top: 64px; padding-top: 12px; }
+.cdx .cd-showpreview { display: none; }
+.cdx .cd-form { padding-bottom: 110px; max-width: 640px; }
+.cdx .cd-tabs { padding: 0 12px 4px; }
+.cdx .cd-themes { grid-template-columns: 1fr 1fr; }
+.cdx .cd-list { grid-template-columns: 1fr 1fr; padding: 4px 12px 16px; }
+.cdx .cd-foot { padding-left: 40px; padding-right: 40px; }
+.cdx .cd-models { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 380px) {
-  .cdx .row-card .cells { grid-template-columns: 1fr; }
-  .cdx .field.cd-dt .cd-dt-row { grid-template-columns: 1fr; }
+.cdx .row-card .cells { grid-template-columns: 1fr; }
+.cdx .field.cd-dt .cd-dt-row { grid-template-columns: 1fr; }
 }
 /* the preview of the customer's own card */
 .cdx .cd-pv { display: grid; gap: 12px; justify-items: start; }
 .cdx .cd-pv-frame { width: min(100%, 320px); aspect-ratio: 9 / 16; border: 1px solid var(--hair2); border-radius: 18px; overflow: hidden; background: var(--card); }
 .cdx .cd-pv-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
 .cdx .cd-pv-acts { display: flex; gap: 10px; flex-wrap: wrap; }
-.cdx .cd-pick { display: grid; gap: 10px; margin-top: 12px; max-width: 420px; }
-.cdx .cd-pick select { width: 100%; min-height: 44px; }
 .cdx .cd-working { display: flex; gap: 8px; align-items: center; }

@@ -3,6 +3,7 @@ import { getApi } from "../lib/api.js";
 import { t } from "../lib/i18n.js";
 import { brandLock } from "../lib/brand.js";
 import { signInView } from "./signin.js";
+import { staffView } from "./staff.js";
 
 // The customer's side, at /app: sign in with an emailed code, then the builder (/app/cards ...).
 // Every page carries Warkah Kad's own bar (the wordmark and the way out), then its own title row.
@@ -13,7 +14,7 @@ export function account({ go, path = [] }) {
   const show = (...nodes) => { view.replaceChildren(...nodes); window.scrollTo(0, 0); };
   const signOut = h("button", { class: "linkbtn", onclick: async () => { await api.signOut(); signIn(); } }, t("Log keluar"));
   const page = (...nodes) => h("main", { class: "page" },
-    h("div", { class: "brandbar" }, h("a", { href: "/", "aria-label": "Warkah Kad" }, brandLock()), h("span", { class: "brandright" }, currentUser ? signOut : null)),
+    h("div", { class: "brandbar" }, h("a", { href: "/", "aria-label": "Warkah Kad" }, brandLock()), h("span", { class: "brandright" }, currentUser?.role === "admin" ? h("button", { class: "linkbtn", onclick: () => go("/app/admin") }, "Admin") : null, currentUser ? signOut : null)),
     ...nodes);
   // On a laptop the pages use the whole window: "wide" pages fill it, the rest (forms) stay a readable width.
   const wide = (el) => (el.classList.add("wide"), el);
@@ -41,6 +42,7 @@ export function account({ go, path = [] }) {
   function route() {
     const ctx = { api, go, show, page, header, waiting, signIn, view, wide };
     const [section, ...rest] = path;
+    if (section === "admin") return staffView(ctx);
     if (section === "cards") return import("./cards.js").then((m) => m.cardsView(ctx, rest));
     go("/app/cards");   // /app on its own is the list of cards
   }

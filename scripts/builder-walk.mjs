@@ -58,6 +58,22 @@ const serverCard = (cardId) => ev(`fetch('/api/cards/${cardId}',{credentials:'sa
 const signInCode = () => { const m = [...readFileSync(LOG, "utf8").matchAll(/Kod log masuk Warkah Kad: (\d{6})/g)]; return m.length ? m[m.length - 1][1] : null; };
 
 try {
+  // ---------- the public pages
+  await nav("/");
+  check("the landing page opens with its promise and a way in", await waitFor(`document.querySelector('.lp-hero h1') && document.querySelector('.lp-hero h1').textContent.includes('Kad kahwin digital')`));
+  check("it shows the four themes, the steps and the questions", (await ev(`document.querySelectorAll('.lp-theme').length`)) === 4 && (await ev(`document.querySelectorAll('.lp-steps li').length`)) === 4 && (await ev(`document.querySelectorAll('.lp-faq details').length`)) >= 4);
+  check("it states no prices (they are not decided)", !(await ev(`/RM\\s?\\d/.test(document.body.innerText)`)));
+  check("nothing runs off the side of the screen", await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`));
+  await shot("landing");
+  await ev(`window.scrollTo(0, document.body.scrollHeight)`); await sleep(300); await shot("landing-foot");
+  await nav("/terma");
+  check("the terms open with their sections", await waitFor(`document.querySelector('.legal h1') && document.querySelector('.legal h1').textContent==='Terma Perkhidmatan' && document.querySelectorAll('.legal section').length>=10`));
+  await shot("terma");
+  await nav("/privasi");
+  check("the privacy notice opens and names who to ask", await waitFor(`document.querySelector('.legal h1') && document.querySelector('.legal h1').textContent==='Notis Privasi' && document.body.innerText.includes('017-265 5375')`));
+  await shot("privasi");
+  await nav("/");
+  check("the main button leads to sign-in", await ev(`(()=>{const a=document.querySelector('.lp-hero .btn.primary');a.click();return true})()`) && await waitFor(`document.querySelector('#sign-email')`));
   // ---------- sign in through the real screen
   await nav("/app/cards");
   check("the sign-in screen shows first", await waitFor(`document.querySelector('#sign-email')`));
@@ -313,11 +329,33 @@ try {
     await shot("tarik-balik");
     await ev(`[...document.querySelectorAll('.cd-down button')].find(b=>b.textContent.includes('Ya, tarik balik')).click()`);
     check("afterwards the panel no longer says the card is live", await waitFor(`!document.querySelector('.cd-pub').innerText.includes('sudah diterbitkan')`, 8000));
-    const gone = await ev(`fetch('${URL_BASE}/${BRIDE.toLowerCase()}-farid/',{credentials:'omit'}).then(r=>r.status)`);
+    const gone = await ev(`fetch('${URL_BASE}/${BRIDE.toLowerCase()}-farid/',{credentials:'omit',cache:'no-store'}).then(r=>r.status)`);
     check("the card's address answers not found", gone === 404, String(gone));
     const after = await ev(`fetch('/api/cards/${cardId}',{credentials:'same-origin'}).then(r=>r.json())`);
     check("the card is back to paid and can still be edited", after.card?.status === "paid", JSON.stringify(after.card?.status));
   }
+
+  // ---------- staff: the admin screen (this customer is made an admin, as `npm run make-admin` would)
+  check("an ordinary customer has no Admin link", !(await ev(`[...document.querySelectorAll('.brandbar button')].some(b=>b.textContent==='Admin')`)));
+  execSync(`cd api && npx wrangler d1 execute warkah-kad --local --command "UPDATE users SET role='admin' WHERE email='${email}'"`, { stdio: "ignore" });
+  const made = await ev(`fetch('/api/cards',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({theme:'lover'})}).then(r=>r.json())`);
+  await nav("/app/admin");
+  check("the admin screen opens with a search box", await waitFor(`document.querySelector('.stf-in')`));
+  await setInput(".stf-in", made.card.slug);
+  check("searching by address finds the new draft, opened, with its state", await waitFor(`document.querySelector('.stf-row') && document.querySelectorAll('.stf-row').length===1 && document.querySelector('.stf-row').innerText.includes('Draf') && document.querySelector('.stf-row').innerText.includes('${email}')`));
+  await shot("admin-draft");
+  await ev(`[...document.querySelectorAll('.stf-row button')].find(b=>b.textContent.includes('Tandakan sudah dibayar')).click()`);
+  check("marking paid asks first", await waitFor(`document.querySelector('.confirm-box') && document.querySelector('.confirm-box').innerText.includes('${made.card.slug}')`, 3000));
+  await shot("admin-confirm");
+  await ev(`[...document.querySelectorAll('.confirm-box button')].find(b=>b.textContent.trim()==='Tandakan').click()`);
+  check("the row now says paid", await waitFor(`document.querySelector('.stf-row').innerText.includes('Sudah dibayar')`));
+  const paidCard = await serverCard(made.card.id);
+  check("the server agrees: paid, and the tier chosen", paidCard.card?.status === "paid", JSON.stringify([paidCard.card?.status, paidCard.card?.tier]));
+  await ev(`(()=>{const s=document.querySelector('.stf-row select');s.value='full';s.dispatchEvent(new Event('change',{bubbles:true}))})()`);
+  await ev(`[...document.querySelectorAll('.stf-row button')].find(b=>b.textContent.includes('Simpan pakej')).click()`);
+  check("the tier can be changed afterwards", await waitFor(`document.querySelector('.stf-row').innerText.includes('Penuh')`) && (await serverCard(made.card.id)).card?.tier === "full");
+  await setInput(".stf-in", "tiada-siapa-begini");
+  check("an empty search says so", await waitFor(`document.querySelector('.stf-none')`));
 
   // ---------- leave and come back
   await nav(`/app/cards/${cardId}`);
