@@ -168,3 +168,7 @@
 .cdx .cd-pv-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
 .cdx .cd-pv-acts { display: flex; gap: 10px; flex-wrap: wrap; }
 .cdx .cd-working { display: flex; gap: 8px; align-items: center; }
+
+/* the admin screen (/app/admin) */
+.stf .cd-pv-acts { display: flex; gap: 10px; flex-wrap: wrap; }
+.stf-f select { min-height: 48px; padding: 0 12px; border: 1px solid var(--ctl-border); border-radius: 10px; background: var(--field); font: 500 1rem var(--body); color: inherit; }

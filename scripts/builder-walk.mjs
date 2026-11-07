@@ -362,7 +362,7 @@ try {
   check("coming back opens where there is still something missing, with everything kept", await waitFor(`document.querySelector('.cd-form .field')`));
   check("the saved names are in the form again", (await ev(`[...document.querySelectorAll('.cd-form .field input')].some(i=>i.value==='Muhammad Farid')`)) || (await ev(`location.pathname`)) !== "");
   await nav("/app/cards");
-  check("the list shows the card with its names and a progress bar", await waitFor(`document.querySelector('.cd-mine h2') && document.querySelector('.cd-mine h2').textContent==='${BRIDE} & Farid'`));
+  check("the list shows the card with its names and a progress bar", await waitFor(`[...document.querySelectorAll('.cd-mine h2')].some(h=>h.textContent==='${BRIDE} & Farid')`));
   await shot("cards-list");
   check("no JavaScript errors anywhere", jsErrors.length === 0, jsErrors.slice(0, 3).join(" | "));
 } catch (e) {
