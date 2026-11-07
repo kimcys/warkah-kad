@@ -1,6 +1,11 @@
 # Copy to .dev.vars for `wrangler dev`. Never commit .dev.vars.
 OTP_PEPPER=dev-only-change-me
+# Sign-in codes: "fake" prints them in the Worker's log. To send real email through Resend instead, comment EMAIL_MODE out and set both of these
+# (the sending domain must be verified in Resend; until then Resend only delivers to the e-mail address of your own Resend account).
 EMAIL_MODE=fake
+# RESEND_API_KEY=re_xxxxxxxx
+# EMAIL_FROM=Warkah Kad <kad@your-verified-domain>
+# EMAIL_REPLY_TO=you@your-domain
 BUILD_SECRET=dev-build-secret
 # Published cards are served at http://localhost:8787/<slug>/ in development. `npm run dev` passes --local-upstream, because wrangler otherwise rewrites the
 # request's host to the production route's host and the Worker cannot tell the card host from the site.
